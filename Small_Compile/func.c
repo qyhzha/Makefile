@@ -2,5 +2,5 @@
 
 void func(void)
 {
-	printf("%s,%d", __func__, __LINE__);
+	printf("[%s,%d]Hello World.", __func__, __LINE__);
 }
