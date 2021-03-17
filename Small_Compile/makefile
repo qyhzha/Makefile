@@ -1,6 +1,6 @@
-main.exe : main.o func.o
+main.exe all : main.o func.o
 	@gcc -o main.exe main.o func.o
-	@echo "compile complete"
+	@echo "compile completely"
 
 main.o : main.c
 	@gcc -o main.o -c main.c
