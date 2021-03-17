@@ -1,4 +1,4 @@
-.PHONY : clean
+.PHONY : clean rebuild all
 
 main.exe all : main.o func.o
 	@gcc -o main.exe main.o func.o
@@ -15,3 +15,5 @@ func.o : func.c
 clean :
 	@del *.o main.exe
 	@echo "delete successfully"
+	
+rebuild : clean all
