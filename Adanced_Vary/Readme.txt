@@ -42,3 +42,11 @@
 		直接在外部定义环境变量进行传递（不推荐，因为会降低makefile的移植性）。
 		使用export定义变量进行传递（等效于定义临时环境变量）。
 		定义make命令行变量进行传递。
+	目标变量：
+		目标变量的作用域只在指令目标及连带规则中。
+		定义方式：target : varyName : varyValue。
+	模式变量：
+		模式变量是对目标变量的一种扩展。
+		模式变量的作用域在符合模式的目标及连带规则中。
+		定义方式：pattern : varyName := varyValue。
+		例如：%e : var := yonghang.qin
