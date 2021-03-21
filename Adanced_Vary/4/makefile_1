@@ -1,0 +1,8 @@
+.PHONY : all
+
+var := yonghang.qin
+
+all :
+	@echo "var = $(var)"
+	@echo "make -f makefile_2"
+	@$(MAKE) -f makefile_2
