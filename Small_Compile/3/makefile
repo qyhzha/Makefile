@@ -1,25 +1,44 @@
-.PHONY : all rebuild clean
+DIR_INC := inc
+DIR_SRC := src
+DIR_OBJ := obj
+DIR_TARGET := target
+
+DIRS := $(DIR_OBJ) $(DIR_TARGET)
+
+SRCS := func.c main.c
+OBJS := $(SRCS:c=o)
+OBJS := $(addprefix $(DIR_OBJ)/,$(OBJS))
+TARGET := main.exe
+TARGET := $(DIR_TARGET)/$(TARGET)
 
 CC := gcc
-RM := del
+RM :=  del
+MKDIR := mkdir
+RMDIR := rd /s /q
 
-INCFOLDER := inc
-SRCFOLDER := src
-OBJFOLDER := obj
-TARGETFOLDER := target
-SRCS := main.c func.c
-OBJS := $(SRCS:c=o)
-TARGET := main.exe
+FLAGS := -I $(DIR_INC)
+ifdef debug
+FLAGS += -g
+endif
 
-$(TARGETFOLDER)/$(TARGET) all : $(OBJFOLDER)/$(OBJS)
-	@$(CC) -o $@ $^
+.PHONY : all rebuild clean
+
+all : $(TARGET)
+
+$(TARGET) : $(DIRS) $(OBJS)
+	@$(CC) -o $(TARGET) $(OBJS)
 	@echo "compile completely"
-
-$(OBJFOLDER)/$(OBJS) : $(OBJFOLDER)/%.o : $(SRCFOLDER)/%.c
-	@$(CC) -o $@ -c $^
+	
+$(DIRS) :
+	@$(MKDIR) $@
+	
+$(DIR_OBJ)/%.o : $(DIR_SRC)/%.c
+	@$(CC) -o $@ -c $^ $(FLAGS)
+	@echo "compile $^"
 	
 clean :
-	@$(RM) $(OBJFOLDER)/*.o $(TARGETFOLDER)/$(TARGET)
+	@$(RMDIR) $(DIR_OBJ)
+	@$(RMDIR) $(DIR_TARGET)
 	@echo "clean completely"
 	
 rebuild : clean all
