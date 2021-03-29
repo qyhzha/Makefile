@@ -60,7 +60,7 @@ else
 $(DIR_DEP)/%.dep : $(DIR_SRC)/%.c
 endif
 	@set -e; \
-	$(C++) $(CFLAG) -MM -E $< | sed 's,\(.*\)\.o[ :]*,$(DIR_OBJ)/\1.o $@ : ,g' > $@
+	$(CC) $(CFLAG) -MM -E $< | sed 's,\(.*\)\.o[ :]*,$(DIR_OBJ)/\1.o $@ : ,g' > $@
 
 ifeq ("$(wildcard $(DIR))","")
 $(DIR_DEP)/%.dep : $(DIR_SRC)/%.cpp $(DIR)
@@ -71,7 +71,7 @@ endif
 	$(C++) $(CFLAG) -MM -E $< | sed 's,\(.*\)\.o[ :]*,$(DIR_OBJ)/\1.o $@ : ,g' > $@
 
 clean :
-	@$(RMDIR) $(DIR)
+	@$(RMDIR) $(DIR_TARGET)
 	@echo "clean completely."
 
 rebuild :

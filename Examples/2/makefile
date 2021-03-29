@@ -6,7 +6,7 @@ RM := del
 TARGET := main.exe
 
 $(TARGET) all : main.o func.o
-	@$(CC) -o $@ $^
+	@$(CC) -o $(TARGET) $^
 	@echo "compile completely"
 
 main.o : main.c
