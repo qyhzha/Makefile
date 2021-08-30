@@ -1,6 +1,12 @@
 
-include $(CONFIG_MAK)
+DIR_CURRENT := $(realpath .)
 
-include $(CMD_MAK)
+DIR_INC := $(ROOT)/Common/inc
+DIR_SRC := $(DIR_CURRENT)/src
 
-include $(BUILD_MAK)
+SOURCE_FILES := main.c
+
+CFLAGS :=
+
+include $(ROOT)/env.mak
+include $(ROOT)/module.mak
