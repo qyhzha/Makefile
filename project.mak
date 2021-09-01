@@ -8,7 +8,7 @@ define MAKE_MODULE
 		DIR_BUILD:=$(DIR_BUILD) \
 		DIR_LIB:=$(DIR_LIB) \
 		DEBUG:=$(DEBUG) && \
-	cd ..;
+	cd ..
 endef
 else
 define MAKE_MODULE
@@ -18,7 +18,7 @@ define MAKE_MODULE
 		DIR_BUILD:=$(DIR_BUILD) \
 		DIR_LIB:=$(DIR_LIB) \
 		DEBUG:=$(DEBUG) && \
-	cd ..;
+	cd ..
 endef
 endif
 
@@ -52,8 +52,13 @@ endif
 link $(TARGET) : $(DIR_BUILD) $(DIR_TARGET) $(LIBS) $(EXTEND_LIB)
 	@$(CC) -o $(TARGET) -Xlinker "-(" $(LIBS) -Xlinker "-)" $(LFLAGS)
 
+ifeq (linux, $(OS))
 $(DIR_LIB)/% : $(DIR_EXTEND_LIB)/%
 	@$(CP) $^ $@
+else
+$(DIR_LIB)$\% : $(DIR_EXTEND_LIB)$\%
+	@$(CP) $^ $@
+endif
 
 clean :
 	@$(RMDIR) $(DIR_BUILD)
