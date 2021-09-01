@@ -18,7 +18,6 @@ DEPS := $(DEPS:.cpp=.dep)
 DEPS := $(addprefix $(DIR_OBJ)/,$(DEPS))
 
 all : $(OUTPUT)
-	@echo "compile $< successfully."
 
 $(OUTPUT) : $(OBJS)
 	@$(AR) $(ARFLAGS) $@ $^

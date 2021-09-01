@@ -21,4 +21,4 @@ endif
 AR := ar
 ARFLAGS := crs
 
-LFLAGS :=
+LFLAGS +=

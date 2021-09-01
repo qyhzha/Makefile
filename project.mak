@@ -50,7 +50,7 @@ $(DIR_BUILD) $(DIR_LIB) $(DIR_MODULES) $(DIR_TARGET):
 endif
 
 link $(TARGET) : $(DIR_BUILD) $(DIR_TARGET) $(LIBS) $(EXTEND_LIB)
-	@$(C++) -o $(TARGET) -Xlinker "-(" $(LIBS) -Xlinker "-)" $(LFLAGS)
+	@$(CC) -o $(TARGET) -Xlinker "-(" $(LIBS) -Xlinker "-)" $(LFLAGS)
 
 $(DIR_LIB)/% : $(DIR_EXTEND_LIB)/%
 	@$(CP) $^ $@

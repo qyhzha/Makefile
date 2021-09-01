@@ -17,5 +17,7 @@ EXTEND_LIB := $(wildcard $(DIR_EXTEND_LIB)/*)
 EXTEND_LIB := $(patsubst $(DIR_EXTEND_LIB)/%,$(DIR_LIB)/%,$(EXTEND_LIB))
 TARGET := $(DIR_TARGET)/target.exe
 
+LFLAGS := $(EXTEND_LIB)
+
 include env.mak
 include project.mak
