@@ -65,4 +65,4 @@ clean :
 
 rebuild :
 	@$(MAKE) clean
-	@$(MAKE) all
+	@$(MAKE)

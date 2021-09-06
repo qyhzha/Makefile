@@ -2,7 +2,7 @@
 ifeq (,$(findstring Windows,$(OS)))
 OS := linux
 else
-OS := win32
+OS := Windows
 endif
 
 MKDIR := mkdir
