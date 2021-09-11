@@ -1,27 +1,5 @@
 .PHONY : all compile link clean rebuild $(MODULES)
 
-ifeq (linux,$(OS))
-define MAKE_MODULE
-	@set -e; \
-	cd $(1) && \
-	$(MAKE) ROOT:=$(ROOT) \
-		DIR_BUILD:=$(DIR_BUILD) \
-		DIR_LIB:=$(DIR_LIB) \
-		DEBUG:=$(DEBUG) && \
-	cd ..
-endef
-else
-define MAKE_MODULE
-	@echo off && \
-	cd $(1) && \
-	$(MAKE) ROOT:=$(ROOT) \
-		DIR_BUILD:=$(DIR_BUILD) \
-		DIR_LIB:=$(DIR_LIB) \
-		DEBUG:=$(DEBUG) && \
-	cd ..
-endef
-endif
-
 all : compile $(TARGET)
 	@echo "compile completely."
 
@@ -29,10 +7,10 @@ compile : $(DIR_BUILD) $(DIR_LIB) $(DIR_MODULES) $(MODULES)
 
 ifeq (,$(MAKECMDGOALS))
 $(MODULES) : $(DIR_BUILD) $(DIR_LIB)
-	$(call MAKE_MODULE, $@)
+	@$(MAKE) -C $@ ROOT:=$(ROOT) DIR_BUILD:=$(DIR_BUILD) DIR_LIB:=$(DIR_LIB) DEBUG:=$(DEBUG)
 else
 $(MODULES) : $(DIR_BUILD) $(DIR_LIB) $(DIR_BUILD)/$(MAKECMDGOALS)
-	$(call MAKE_MODULE, $@)
+	@$(MAKE) -C $@ ROOT:=$(ROOT) DIR_BUILD:=$(DIR_BUILD) DIR_LIB:=$(DIR_LIB) DEBUG:=$(DEBUG)
 endif
 
 ifeq (linux,$(OS))
